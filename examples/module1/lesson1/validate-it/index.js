@@ -4,31 +4,34 @@ function validator() {
   const button2 = document.getElementById('button2');
   const result = document.getElementById('result');
 
-  button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
+  const validate = () => {
+    if (!input.value) {
+      result.innerHTML = 'Empty input';
+      return;
     }
-  });
 
-  button2.addEventListener('click', () => {
+    const inputValue = Number(input.value);
+    if (
+      isNaN(inputValue) ||
+      !Number.isInteger(inputValue) ||
+      Number(inputValue) > 100 ||
+      Number(inputValue) < 0
+    ) {
+      result.innerHTML = 'Invalid';
+      return;
+    }
+
+    result.innerHTML = 'Valid';
+  };
+
+  const clear = () => {
     input.value = '';
     result.innerHTML = '';
-  });
+  };
+
+  button.addEventListener('click', validate(input.value));
+
+  button2.addEventListener('click', clear);
 }
 
 validator();
