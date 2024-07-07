@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom';
 
 import { FiTrash2 } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 
-import { CartContext } from '../contexts/CartContext';
 import { useAppDispatch, useAppSelector } from '../hooks/rtk';
 import {
   clearCart,
   selectCartItems,
+  selectCartTotal,
   selectItemAmount,
 } from '../state/cartSlice';
 import CartItem from './CartItem';
@@ -20,10 +20,10 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
-  const { total } = useContext(CartContext);
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectCartItems);
   const itemAmount = useAppSelector(selectItemAmount);
+  const total = useAppSelector(selectCartTotal);
 
   return (
     <div
