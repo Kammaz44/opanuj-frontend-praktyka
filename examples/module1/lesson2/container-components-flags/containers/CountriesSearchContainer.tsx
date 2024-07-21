@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import CharacterList from '../components/CharacterList';
+import CountryList from '../components/CountriesList';
 import SearchForm from '../components/SearchForm';
 import SearchTitle from '../components/SearchTitle';
-import { useCharacterSearch } from '../hooks/use-character-search';
-import { sortCharacters } from '../utils/sortCharacters';
+import { useCountriesSearch } from '../hooks/use-countries-search';
 
-function CharacterSearchContainer() {
+function CountriesSearchContainer() {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
-  const characters = useCharacterSearch(name, gender);
+  const countries = useCountriesSearch(name);
   const [sortOption, setSortOption] = useState('');
 
-  const sortedCharacters = sortCharacters(characters, sortOption);
+  // const sortedCharacters = sortCharacters(characters, sortOption);
 
   return (
     <>
@@ -27,10 +26,10 @@ function CharacterSearchContainer() {
         setSortOption={setSortOption}
       />
       <div className="pt-12" />
-      <CharacterList characters={sortedCharacters} />
+      <CountryList countries={countries} />
       <div className="pt-16" />
     </>
   );
 }
 
-export default CharacterSearchContainer;
+export default CountriesSearchContainer;
